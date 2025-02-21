@@ -37,7 +37,7 @@ echo "${Y}Installing Nginx${N}"
 dnf install nginx -y
 validation $? "Installing Nginx"
 
-#replaces default nginx web interface with roboshop web bjinterface
+#replaces default nginx web interface with roboshop web interface
 echo "${Y}Configuring Web Interface${N}"       
 rm -rf /usr/share/nginx/html/*
 mkdir /usr/share/nginx/html

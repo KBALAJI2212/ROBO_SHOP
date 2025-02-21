@@ -22,7 +22,9 @@ validation(){
     fi
 }
 
-if [ $(id -u) -ne 0 ];
+
+#checks for Root permissions
+if [ $(id -u) -ne 0 ];    
 then
     echo "Please run this script as Root User"
     exit 1;
@@ -30,12 +32,13 @@ else
     true;
 fi
 
-echo "${Y}Installing Nginx${N}"
+#Installs Nginx
+echo "${Y}Installing Nginx${N}"         
 dnf install nginx -y
 validation $? "Installing Nginx"
 
-
-echo "${Y}Configuring Web Interface${N}"
+#replaces default nginx web interface with roboshop web bjinterface
+echo "${Y}Configuring Web Interface${N}"       
 rm -rf /usr/share/nginx/html/*
 mkdir /usr/share/nginx/html
 cd /usr/share/nginx/html/
@@ -44,7 +47,7 @@ unzip -o web.zip
 rm -f /usr/share/nginx/html/web.zip
 validation $? "Configuring Web Interface"
 
-
+#Connects web interface with backend services
 echo "${Y}Configuring Nginx${N}"
 nginx_config="/etc/nginx/default.d/roboshop.conf"
 cat << EOF >$nginx_config
@@ -67,8 +70,10 @@ location /health {
 EOF
 validation $? "Configuring Nginx"
 
-echo "${Y}Restarting Nginx${N}"
+
+#Starts Nginx
+echo "${Y}Starting Nginx${N}"
 systemctl enable nginx
 systemctl start nginx
-validation $? "Restarting Nginx"
+validation $? "Starting Nginx"
 

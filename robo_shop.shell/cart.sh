@@ -43,7 +43,7 @@ validation $? "Installing NodeJs"
 
 #Downloads Cart service
 echo -e "${Y} Downloading Cart Service${N}"
-useradbalaji.website
+useradd roboshop
 mkdir /app
 cd /app
 wget https://roboshop-builds.s3.amazonaws.com/cart.zip

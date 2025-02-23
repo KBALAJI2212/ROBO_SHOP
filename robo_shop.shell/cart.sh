@@ -16,9 +16,9 @@ N="\e[0m"
 validation(){
     if [ $1 -eq 0 ];
     then 
-        echo "$2 is ${G}successful${N}"
+        echo -e "${G}$2 is successful${N}"
     else 
-        echo "$2 has ${R}Failed${N}"
+        echo -e "${R}$2 has Failed${N}"
         exit 1;
     fi
 }
@@ -46,6 +46,7 @@ echo -e "${Y} Downloading Cart Service${N}"
 useradd roboshop
 mkdir /app
 cd /app
+yum install wget unzip -y
 wget https://roboshop-builds.s3.amazonaws.com/cart.zip
 unzip -o cart.zip
 validation $? "Downloading Cart Service"
@@ -64,8 +65,11 @@ cat << EOF >$cart_config
 Description = Cart Service
 [Service]
 User=roboshop
-Environment=REDIS_HOST=redis.balaji.website
-Environment=CATALOGUE_HOST=catalogue.balaji.website
+
+#####use local host for Redis and Catalogue if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+
+Environment=REDIS_HOST=localhost
+Environment=CATALOGUE_HOST=localhost
 Environment=CATALOGUE_PORT=8080
 ExecStart=/bin/node /app/server.js
 SyslogIdentifier=cart

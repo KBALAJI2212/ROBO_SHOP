@@ -47,7 +47,7 @@ useradd roboshop
 mkdir /app
 cd /app
 yum install wget unzip -y
-wget https://roboshop-builds.s3.amazonaws.com/cart.zip
+wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/cart.zip
 unzip -o cart.zip
 validation $? "Downloading Cart Service"
 

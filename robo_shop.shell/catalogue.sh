@@ -47,7 +47,7 @@ useradd roboshop
 mkdir /app
 cd /app
 yum install wget unzip -y
-wget https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/catalogue.zip
 unzip -o catalogue.zip
 validation $? "Downloading Catalogue Service"
 

@@ -39,7 +39,7 @@ useradd roboshop
 mkdir /app
 cd /app
 yum install wget unzip maven -y
-wget https://roboshop-builds.s3.amazonaws.com/shipping.zip
+wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/shipping.zip
 unzip -o /app/shipping.zip
 mvn clean package
 mv target/shipping-1.0.jar shipping.jar

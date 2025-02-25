@@ -47,7 +47,7 @@ useradd roboshop
 mkdir /app
 cd /app
 yum install wget unzip -y
-wget https://roboshop-builds.s3.amazonaws.com/user.zip
+wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/user.zip
 unzip -o user.zip
 validation $? "Downloading User Service"
 

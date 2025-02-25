@@ -46,7 +46,7 @@ echo -e "${Y}Installing Payment Service${N}"
 useradd roboshop
 mkdir /app
 cd /app
-wget https://roboshop-builds.s3.amazonaws.com/payment.zip
+wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/payment.zip
 unzip -o /app/payment.zip
 pip3.6 install -r requirements.txt
 validation $? "Installing Payment Service"

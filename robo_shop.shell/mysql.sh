@@ -59,5 +59,5 @@ validation $? "Starting MySQL"
 echo -e "${Y}Securing MySQL${N}"
 temp_pass=$(sudo grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}')
 new_pass="RoboShop@1"
-mysql --connect-expired-password -u root -p"$temp_pass" -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$new_pass';"
+mysql --connect-expired-password -u root -p"$temp_pass" -e "ALTER USER 'root'@'%' IDENTIFIED BY '$new_pass';"
 validation $? "Securing MySQL"

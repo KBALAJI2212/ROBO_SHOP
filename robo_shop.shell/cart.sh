@@ -44,8 +44,8 @@ validation $? "Installing NodeJs"
 #Downloads Cart service
 echo -e "${Y} Downloading Cart Service${N}"
 useradd roboshop
-mkdir /app
-cd /app
+mkdir -p /app/cart
+cd /app/cart
 yum install wget unzip -y
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/cart.zip
 unzip -o cart.zip
@@ -71,7 +71,7 @@ User=roboshop
 Environment=REDIS_HOST=localhost
 Environment=CATALOGUE_HOST=localhost
 Environment=CATALOGUE_PORT=8080
-ExecStart=/bin/node /app/server.js
+ExecStart=/bin/node /app/cart/server.js
 SyslogIdentifier=cart
 
 [Install]

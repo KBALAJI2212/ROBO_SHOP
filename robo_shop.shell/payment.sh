@@ -44,10 +44,10 @@ validation $? "Preparing Prerequisites"
 #Downloads and Installs Payment Service
 echo -e "${Y}Installing Payment Service${N}"
 useradd roboshop
-mkdir /app
-cd /app
+mkdir -p /app/payment
+cd /app/payment
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/payment.zip
-unzip -o /app/payment.zip
+unzip -o payment.zip
 pip3.6 install -r requirements.txt
 validation $? "Installing Payment Service"
 
@@ -62,7 +62,7 @@ Description=Payment Service
 
 [Service]
 User=root
-WorkingDirectory=/app
+WorkingDirectory=/app/payment
 
 #####use local host for Cart Service ,User Service and RabbitMQ if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 

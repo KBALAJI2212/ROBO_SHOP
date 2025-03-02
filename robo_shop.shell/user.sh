@@ -44,8 +44,8 @@ validation $? "Installing NodeJs"
 #Downloads User service
 echo -e "${Y} Downloading User Service${N}"
 useradd roboshop
-mkdir /app
-cd /app
+mkdir -p /app/user
+cd /app/user
 yum install wget unzip -y
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/user.zip
 unzip -o user.zip
@@ -72,7 +72,7 @@ Environment=MONGO=true
 
 Environment=REDIS_HOST=localhost
 Environment=MONGO_URL="mongodb://localhost:27017/users"
-ExecStart=/bin/node /app/server.js
+ExecStart=/bin/node /app/user/server.js
 SyslogIdentifier=user
 
 [Install]

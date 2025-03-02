@@ -44,8 +44,8 @@ validation $? "Installing NodeJs"
 #Downloads Catalogue service
 echo -e "${Y} Downloading Catalogue Service${N}"
 useradd roboshop
-mkdir /app
-cd /app
+mkdir -p /app/catalogue
+cd /app/catalogue
 yum install wget unzip -y
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/catalogue.zip
 unzip -o catalogue.zip
@@ -72,7 +72,7 @@ Environment=MONGO=true
 #####use local host if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
 Environment=MONGO_URL="mongodb://localhost:27017/catalogue" 
-ExecStart=/bin/node /app/server.js
+ExecStart=/bin/node /app/catalogue/server.js
 SyslogIdentifier=catalogue
 
 [Install]
@@ -106,5 +106,5 @@ validation $? "Installing MongoDB Client"
 #Loads Catalogue Schema into MongoDB
 echo -e "${Y}Loading Catalogue Schema into MongoDB${N}"
 #####use local host if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
-mongo --host localhost </app/schema/catalogue.js
+mongo --host localhost </app/catalogue/schema/catalogue.js
 validation $? "Loading Catalogue Schema into MongoDB"

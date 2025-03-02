@@ -36,11 +36,11 @@ fi
 #Downloads and Installs Shipping Service
 echo -e "${Y}Downloading and Installing Shipping Package${N}"
 useradd roboshop
-mkdir /app
-cd /app
+mkdir -p /app/shipping
+cd /app/shipping
 yum install wget unzip maven -y
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/shipping.zip
-unzip -o /app/shipping.zip
+unzip -o shipping.zip
 mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 validation $? "Downloading and Installing Shipping Package"
@@ -61,7 +61,7 @@ User=roboshop
 
 Environment=CART_ENDPOINT=localhost:8080
 Environment=DB_HOST=localhost
-ExecStart=/bin/java -jar /app/shipping.jar
+ExecStart=/bin/java -jar /app/shipping/shipping.jar
 SyslogIdentifier=shipping
 
 [Install]
@@ -76,7 +76,7 @@ dnf install mysql -y
 
 #####use local host for MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
-mysql -h localhost -uroot -pRoboShop@1 < /app/schema/shipping.sql 
+mysql -h localhost -uroot -pRoboShop@1 < /app/shipping/schema/shipping.sql 
 validation $? "Loading Shipping Schema into MySQL Server"
 
 

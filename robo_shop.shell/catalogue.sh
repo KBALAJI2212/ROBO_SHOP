@@ -55,6 +55,7 @@ validation $? "Downloading Catalogue Service"
 #Installs the NodeJs Application
 echo -e "${Y}Installing Catalogue Service${N}"
 npm install
+# export CATALOGUE_SERVER_PORT=8081
 validation $? "Installing Catalogue Service"
 
 
@@ -68,10 +69,11 @@ Description = Catalogue Service
 [Service]
 User=roboshop
 Environment=MONGO=true
+Environment=CATALOGUE_SERVER_PORT=8081
 
-#####use local host if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####Use 0.0.0.0 if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
-Environment=MONGO_URL="mongodb://localhost:27017/catalogue" 
+Environment=MONGO_URL="mongodb://0.0.0.0:27017/catalogue" 
 ExecStart=/bin/node /app/catalogue/server.js
 SyslogIdentifier=catalogue
 

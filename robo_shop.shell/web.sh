@@ -59,20 +59,13 @@ location /images/ {
   try_files \$uri /images/placeholder.jpg;
 }
 
-#####use local host for Services if hosted on same server, if not change "localhost" to respective services' IP address or DNS name.#####
+#####use "localhost" for Services if hosted on same server, if not change "localhost" to respective services' IP address or DNS name.#####
 
-# location /api/catalogue/ { proxy_pass http://localhost:8080/; }
-# location /api/user/ { proxy_pass http://localhost:8080/; }
-# location /api/cart/ { proxy_pass http://localhost:8080/; }
-# location /api/shipping/ { proxy_pass http://localhost:8080/; }
-# location /api/payment/ { proxy_pass http://localhost:8080/; }
-
-location /api/catalogue/ { proxy_pass http://balaji.website.shell.catalogue:8080/; }
-location /api/user/ { proxy_pass http://balaji.website.shell.user:8081/; }
-location /api/cart/ { proxy_pass http://balaji.website.shell.cart:8082/; }
-location /api/shipping/ { proxy_pass http://balaji.website.shell.shipping:8083/; }
-location /api/payment/ { proxy_pass http://balaji.website.shell.payment:8084/; }
-
+# location /api/catalogue/ { proxy_pass http://localhost:8082/; }
+# location /api/user/ { proxy_pass http://localhost:8081/; }
+# location /api/cart/ { proxy_pass http://localhost:8083/; }
+# location /api/shipping/ { proxy_pass http://localhost:8084/; }
+# location /api/payment/ { proxy_pass http://localhost:8085/; }
 
 location /health {
   stub_status on;

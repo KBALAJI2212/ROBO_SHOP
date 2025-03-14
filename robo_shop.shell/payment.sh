@@ -64,12 +64,12 @@ Description=Payment Service
 User=root
 WorkingDirectory=/app/payment
 
-#####use local host for Cart Service ,User Service and RabbitMQ if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####use "localhost" for Cart Service ,User Service and RabbitMQ if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
 Environment=CART_HOST=localhost
-Environment=CART_PORT=8080
+Environment=CART_PORT=8083
 Environment=USER_HOST=localhost
-Environment=USER_PORT=8080
+Environment=USER_PORT=8081
 Environment=AMQP_HOST=localhost
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=RoboShop@1

@@ -67,8 +67,10 @@ Description = User Service
 [Service]
 User=roboshop
 Environment=MONGO=true
+Environment=USER_SERVER_PORT=8081
 
-#####use local host for Redis and MongoDB if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+
+#####use "localhost" for Redis and MongoDB if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
 Environment=REDIS_HOST=localhost
 Environment=MONGO_URL="mongodb://localhost:27017/users"

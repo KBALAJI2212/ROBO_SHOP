@@ -69,11 +69,11 @@ Description = Catalogue Service
 [Service]
 User=roboshop
 Environment=MONGO=true
-Environment=CATALOGUE_SERVER_PORT=8081
+Environment=CATALOGUE_SERVER_PORT=8082
 
-#####Use 0.0.0.0 if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####Use "localhost" if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
-Environment=MONGO_URL="mongodb://0.0.0.0:27017/catalogue" 
+Environment=MONGO_URL="mongodb://localhost:27017/catalogue" 
 ExecStart=/bin/node /app/catalogue/server.js
 SyslogIdentifier=catalogue
 
@@ -107,6 +107,6 @@ validation $? "Installing MongoDB Client"
 
 #Loads Catalogue Schema into MongoDB
 echo -e "${Y}Loading Catalogue Schema into MongoDB${N}"
-#####use local host if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####use "localhost" if MongoDB is hosted on same server, if not change "localhost" to IP address or DNS name.#####
 mongo --host localhost </app/catalogue/schema/catalogue.js
 validation $? "Loading Catalogue Schema into MongoDB"

@@ -45,7 +45,7 @@ dnf module enable redis:remi-6.2 -y
 dnf install redis -y
 validation $? "Installing Redis"
 
-#Configures and starts Redis 
+##modifies the Redis configuration file to allow remote connections and starts Redis 
 echo -e "${Y}Starting Redis${N}"
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
 systemctl enable redis

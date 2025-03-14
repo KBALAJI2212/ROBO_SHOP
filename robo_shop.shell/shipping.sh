@@ -57,9 +57,9 @@ Description=Shipping Service
 [Service]
 User=roboshop
 
-#####use local host for Cart Service and MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####use "localhost" for Cart Service and MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
-Environment=CART_ENDPOINT=localhost:8080
+Environment=CART_ENDPOINT=localhost:8083
 Environment=DB_HOST=localhost
 ExecStart=/bin/java -jar /app/shipping/shipping.jar
 SyslogIdentifier=shipping
@@ -74,7 +74,7 @@ validation $? "Configuring Shipping Service"
 echo -e "${Y}Loading Shipping Schema into MySQL Server${N}"
 dnf install mysql -y
 
-#####use local host for MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####use "localhost" for MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
 mysql -h localhost -uroot -pRoboShop@1 < /app/shipping/schema/shipping.sql 
 validation $? "Loading Shipping Schema into MySQL Server"

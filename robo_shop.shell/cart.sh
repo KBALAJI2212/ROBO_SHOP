@@ -65,12 +65,14 @@ cat << EOF >$cart_config
 Description = Cart Service
 [Service]
 User=roboshop
+Environment=CART_SERVER_PORT=8083
 
-#####use local host for Redis and Catalogue if hosted on same server, if not change "localhost" to IP address or DNS name.#####
+#####use "localhost" for Redis and Catalogue if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
 Environment=REDIS_HOST=localhost
 Environment=CATALOGUE_HOST=localhost
-Environment=CATALOGUE_PORT=8080
+Environment=CATALOGUE_PORT=8082
+
 ExecStart=/bin/node /app/cart/server.js
 SyslogIdentifier=cart
 

@@ -56,6 +56,7 @@ Description=Shipping Service
 
 [Service]
 User=roboshop
+Environment=SERVER_PORT=8084  
 
 #####use "localhost" for Cart Service and MySQL if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 

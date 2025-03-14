@@ -63,6 +63,8 @@ Description=Payment Service
 [Service]
 User=root
 WorkingDirectory=/app/payment
+Environment=SHOP_PAYMENT_PORT=8085
+
 
 #####use "localhost" for Cart Service ,User Service and RabbitMQ if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 

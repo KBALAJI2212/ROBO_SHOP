@@ -49,6 +49,7 @@ validation $? "Installing MongoDB "
 #modifies the MongoDB configuration file to allow remote connections.
 echo -e "${Y}Configuring MongoDB${N}"
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+sed -i 's/^::1/# ::1/' /etc/hosts
 validation $? "Configuring Mongodb"
 
 #Starts and Enables MongoDB

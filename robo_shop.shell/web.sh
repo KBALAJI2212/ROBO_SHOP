@@ -61,11 +61,11 @@ location /images/ {
 
 #####use "localhost" for Services if hosted on same server, if not change "localhost" to respective services' IP address or DNS name.#####
 
-# location /api/catalogue/ { proxy_pass http://localhost:8082/; }
-# location /api/user/ { proxy_pass http://localhost:8081/; }
-# location /api/cart/ { proxy_pass http://localhost:8083/; }
-# location /api/shipping/ { proxy_pass http://localhost:8084/; }
-# location /api/payment/ { proxy_pass http://localhost:8085/; }
+ location /api/catalogue/ { proxy_pass http://localhost:8082/; }
+ location /api/user/ { proxy_pass http://localhost:8081/; }
+ location /api/cart/ { proxy_pass http://localhost:8083/; }
+ location /api/shipping/ { proxy_pass http://localhost:8084/; }
+ location /api/payment/ { proxy_pass http://localhost:8085/; }
 
 location /health {
   stub_status on;

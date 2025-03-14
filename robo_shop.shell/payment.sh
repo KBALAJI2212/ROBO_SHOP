@@ -37,6 +37,7 @@ fi
 echo -e "${Y}Preparing Prerequisites${N}"
 yum install python3 python3-pip -y
 yum install python3-devel -y
+yum groupinstall "Development Tools" -y
 pip3.6 install uwsgi
 validation $? "Preparing Prerequisites"
 
@@ -48,6 +49,7 @@ mkdir -p /app/payment
 cd /app/payment
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/payment.zip
 unzip -o payment.zip
+sed -i "s/socket = 0.0.0.0:8080/socket = 0.0.0.0:$(printenv SHOP_PAYMENT_PORT)/" /app/payment/payment.ini
 pip3.6 install -r requirements.txt
 validation $? "Installing Payment Service"
 

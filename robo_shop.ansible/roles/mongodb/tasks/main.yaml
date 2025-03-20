@@ -10,9 +10,9 @@
 
 - name: Configuring MongoDB
   ansible.builtin.replace:
-  path: /etc/mongod.conf
-  regexp: "127.0.0.1"
-  replace: "0.0.0.0"
+    path: /etc/mongod.conf
+    regexp: "127.0.0.1"
+    replace: "0.0.0.0"
 
 - name: Enabling and Starting MongoDB
   ansible.builtin.service:

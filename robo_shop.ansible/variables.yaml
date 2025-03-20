@@ -1,0 +1,16 @@
+#This is a security risk. we should use Ansible Vault for storing sensitive info.
+
+ansible_password: pocof123 
+mysql_password: RoboShop@1
+
+
+mongodb_host: localhost
+redis_host: localhost
+mysql_host: localhost
+rabbitmq_host: localhost
+
+catalogue_host: localhost
+user_host:  localhost
+cart_host:  localhost
+shipping_host: localhost
+payment_host: localhost

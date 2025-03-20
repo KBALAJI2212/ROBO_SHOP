@@ -1,0 +1,34 @@
+- name: Configuring MySQL Module
+  ansible.builtin.shell: dnf module disable mysql -y
+
+- name: Setting up MySQL Repo
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Installing MySQL
+  ansible.builtin.package:
+    name: mysql-community-server
+    state: present
+
+- name: Starting MySQL
+  ansible.builtin.service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- name: Getting MySQL Access Password
+  shell: "sudo grep 'temporary password' /var/log/mysqld.log | tail -1 | awk '{print $NF}'"
+  register: temp_pass
+  changed_when: false
+
+- name: Configuring MySQL User
+  shell: |
+    mysql --connect-expired-password -u root -p'{{ temp_pass.stdout }}' -e "
+    SET PASSWORD = PASSWORD('{{ mysql_password }}');
+    CREATE USER 'root'@'%' IDENTIFIED BY '{{ mysql_password }}';
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+    GRANT PROXY ON ''@'' TO 'root'@'%';
+    DROP USER 'root'@'localhost';
+    FLUSH PRIVILEGES;"
+  changed_when: true

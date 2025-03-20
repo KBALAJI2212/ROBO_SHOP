@@ -1,0 +1,6 @@
+- name: "Installing {{service}}"
+  hosts:  "{{service}}"
+  vars_files: 
+    - variables.yaml
+  roles:
+    - "{{service}}"

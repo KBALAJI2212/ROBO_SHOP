@@ -1,0 +1,11 @@
+- name: Setting up Service
+  import_tasks: ../../common/tasks/service_setup1.yaml
+
+- name: Preparing to Install Service
+  import_tasks: ../../common/tasks/nodejs18.yaml
+
+- name: Service Configuration
+  import_tasks: ../../common/tasks/service_config2.yaml
+
+- name: Enabling and Starting Service
+  import_tasks: ../../common/tasks/service_start3.yaml

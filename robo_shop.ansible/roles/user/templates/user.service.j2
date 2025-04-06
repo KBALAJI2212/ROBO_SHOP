@@ -8,9 +8,9 @@ Environment=USER_SERVER_PORT=8081
 
 
 
-Environment=REDIS_HOST="{{redis_host}}"
-Environment=MONGO_URL="mongodb://{{mongodb_host}}:27017/users"
-ExecStart="/bin/node /app/{{service}}/server.js"
+Environment=REDIS_HOST={{redis_host}}
+Environment=MONGO_URL=mongodb://{{mongodb_host}}:27017/users
+ExecStart=/bin/node /app/{{service}}/server.js
 SyslogIdentifier=user
 
 [Install]

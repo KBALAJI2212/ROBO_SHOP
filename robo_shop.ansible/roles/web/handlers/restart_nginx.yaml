@@ -1,0 +1,5 @@
+- name: Restarting Nginx
+  ansible.builtin.package:
+    name: nginx
+    state: restarted
+    enabled: yes

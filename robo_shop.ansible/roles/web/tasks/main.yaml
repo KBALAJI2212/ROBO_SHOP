@@ -1,0 +1,33 @@
+- name: Installing Nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Removing Default Nginx Webpage
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Creating Custom Webpage Folder
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: Downloading Custom Webpage
+  ansible.builtin.unarchive:
+    src: "https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/{{service}}.zip"
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+- name: Setting Cutom Webpage
+  ansible.builtin.replace:
+    path: /usr/share/nginx/html/js/controller.js
+    regexp: "splash.html"
+    replace: "shell.html"
+
+- name: Configuring Nginx
+  ansible.builtin.template:
+    src: roboshop.conf.j2
+    dest: /etc/nginx/default.d/roboshop.conf
+  notify:
+    - Restarting Nginx

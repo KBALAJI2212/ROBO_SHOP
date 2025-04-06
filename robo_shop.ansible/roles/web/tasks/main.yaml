@@ -19,7 +19,7 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
-- name: Setting Cutom Webpage
+- name: Setting Custom Webpage
   ansible.builtin.replace:
     path: /usr/share/nginx/html/js/controller.js
     regexp: "splash.html"

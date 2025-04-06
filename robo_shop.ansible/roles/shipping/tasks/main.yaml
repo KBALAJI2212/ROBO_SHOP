@@ -1,0 +1,26 @@
+- name: Setting up Service
+  import_tasks: ../../common/tasks/service_setup1.yaml
+
+- name: Installing {{service}}
+  ansible.builtin.shell: mvn clean package
+  args:
+    chdir: "/app/{{service}}"
+
+- name: Renaming Service file
+  ansible.builtin.shell: mv target/shipping-1.0.jar shipping.jar
+  args:
+    chdir: "/app/{{service}}"
+
+- name: Service Configuration
+  import_tasks: ../../common/tasks/service_config2.yaml
+
+- name: Installing MySQL
+  ansible.builtin.package:
+    name: mysql
+    state: present
+
+- name: Loading Schema in MySQL
+  ansible.builtin.shell: "mysql -h {{mysql_host}} -uroot -p{{mysql_password}} < /app/{{service}}/schema/shipping.sql "
+
+- name: Enabling and Starting Service
+  import_tasks: ../../common/tasks/service_start3.yaml

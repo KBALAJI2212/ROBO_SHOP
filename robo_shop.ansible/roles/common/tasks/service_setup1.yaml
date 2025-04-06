@@ -1,0 +1,14 @@
+- name: Creating RoboShop User
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Creating App Directory
+  ansible.builtin.file:
+    path: "/app/{{service}}"
+    state: directory
+
+- name: Downlaoding "{{service}}" service
+  ansible.builtin.unarchive:
+    src: "https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/{{service}}.zip"
+    dest: "/app/{{service}}"
+    remote_src: yes

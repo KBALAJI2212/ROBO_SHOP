@@ -1,4 +1,4 @@
-- name: "Installing {{service}}"
+- name: "Setting Up {{service}} Service"
   become: yes
   hosts: "{{service}}"
   vars_files:

@@ -1,16 +1,20 @@
 #This is a security risk. we should use Ansible Vault for storing sensitive info.
 
-ansible_password: pocof123 
+ansible_password: pocof123
 mysql_password: RoboShop@1
+rabbitmq_password: RoboShop@1
 
+#####use "localhost" for services if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
+##DataBases
 mongodb_host: localhost
 redis_host: localhost
 mysql_host: localhost
 rabbitmq_host: localhost
 
+##Services
 catalogue_host: localhost
-user_host:  localhost
-cart_host:  localhost
+user_host: localhost
+cart_host: localhost
 shipping_host: localhost
 payment_host: localhost

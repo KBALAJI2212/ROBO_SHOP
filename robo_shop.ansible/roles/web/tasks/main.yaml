@@ -23,7 +23,7 @@
   ansible.builtin.replace:
     path: /usr/share/nginx/html/js/controller.js
     regexp: "splash.html"
-    replace: "shell.html"
+    replace: "ansible.html"
 
 - name: Configuring Nginx
   ansible.builtin.template:

@@ -1,0 +1,33 @@
+- name: Setting up Service
+  import_tasks: ../../common/tasks/service_setup1.yaml
+
+- name: Installing Python and prerequisites
+  ansible.builtin.yum:
+    name:
+      - python3
+      - python3-pip
+      - python3-devel
+      - "@Development Tools"
+    state: present
+
+- name: Installing uwsgi
+  ansible.builtin.pip:
+    name: uwsgi
+    executable: pip3.6
+
+- name: Setting socket port for uwsgi
+  ansible.builtin.replace:
+    path: /app/payment/payment.ini
+    regexp: '^socket = 0\.0\.0\.0:8080'
+    replace: "socket = 0.0.0.0:8085"
+
+- name: Installing {{service}}
+  ansible.builtin.shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: "/app/{{service}}"
+
+- name: Service Configuration
+  import_tasks: ../../common/tasks/service_config2.yaml
+
+- name: Enabling and Starting Service
+  import_tasks: ../../common/tasks/service_start3.yaml

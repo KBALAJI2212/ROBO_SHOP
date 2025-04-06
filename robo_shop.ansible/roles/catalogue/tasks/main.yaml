@@ -1,0 +1,24 @@
+- name: Setting up Service
+  import_tasks: ../../common/tasks/service_setup1.yaml
+
+- name: Preparing to Install Service
+  import_tasks: ../../common/tasks/nodejs18.yaml
+
+- name: Service Configuration
+  import_tasks: ../../common/tasks/service_config2.yaml
+
+- name: Enabling and Starting Service
+  import_tasks: ../../common/tasks/service_start3.yaml
+
+- name: Configuring Schema Loading
+  ansible.builtin.template:
+    src: "mongo.repo.j2"
+    dest: "/etc/yum.repos.d/mongo.repo"
+
+- name: Installing MongoDB Client
+  ansible.builtin.package:
+    name: mongodb-org-shell
+    state: present
+
+- name: Loading Schema in MongoDB
+  ansible.builtin.shell: "mongo --host {{mongodb_host}} < /app/{{service}}/schema/catalogue.js"

@@ -1,6 +1,13 @@
 - name: Setting up Service
   import_tasks: ../../common/tasks/service_setup1.yaml
 
+- name: Installing Java & Maven
+  ansible.builtin.package:
+    name:
+      - java-11-openjdk-devel
+      - maven
+    state: present
+
 - name: Installing {{service}}
   ansible.builtin.shell: mvn clean package
   args:

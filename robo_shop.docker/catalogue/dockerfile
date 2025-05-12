@@ -1,0 +1,15 @@
+FROM node:18
+
+EXPOSE 8082
+
+WORKDIR /app/catalogue
+
+ENV MONGO=true
+
+COPY package.json /app/catalogue/
+
+COPY server.js /app/catalogue/
+
+RUN npm install
+
+CMD [ "node","server.js" ]

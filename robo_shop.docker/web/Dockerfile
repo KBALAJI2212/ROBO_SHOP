@@ -1,9 +1,9 @@
 # Uses AlmaLinux 8 as base
-FROM almalinux/8-minimal
+FROM almalinux:8
 
 # Installs nginx
 RUN dnf install -y nginx && \
-    dnf install wget unzip yum
+    dnf install -y wget unzip yum
 
 # Set working directory
 WORKDIR /usr/share/nginx/html

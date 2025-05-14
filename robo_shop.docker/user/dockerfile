@@ -1,0 +1,21 @@
+FROM node:18.19.1-alpine3.19
+
+EXPOSE 8080
+
+RUN addgroup -S roboshop_grp && adduser -S roboshop -G roboshop_grp
+
+WORKDIR /app/user
+
+ENV MONGO=true
+
+RUN chown roboshop:roboshop_grp /app/user
+
+USER roboshop
+
+COPY package.json /app/user/
+
+COPY server.js /app/user/
+
+RUN npm install
+
+CMD [ "node","server.js" ]

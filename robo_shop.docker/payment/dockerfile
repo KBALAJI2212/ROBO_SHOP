@@ -1,0 +1,28 @@
+FROM python:3.9.18-alpine3.19
+
+EXPOSE 8080
+
+ENV AMQP_USER=roboshop \
+    AMQP_PASS=RoboShop@1
+
+USER root
+
+WORKDIR /app/payment
+
+RUN addgroup -S roboshop_grp && adduser -S roboshop -G roboshop_grp
+
+RUN chown roboshop:roboshop_grp /app/payment/
+
+COPY requirements.txt /app/payment/
+
+RUN apk add python3-dev build-base linux-headers pcre-dev
+
+RUN pip install -r requirements.txt
+
+COPY *.py /app/payment/
+
+COPY payment.ini /app/payment/
+
+CMD ["uwsgi", "--ini", "payment.ini"]
+
+USER roboshop

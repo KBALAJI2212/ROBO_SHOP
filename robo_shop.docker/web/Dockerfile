@@ -1,10 +1,9 @@
-# Uses Alpine as base OS
-FROM aline
+# Uses AlmaLinux 8 as base
+FROM almalinux:8
 
 # Installs nginx
-RUN apk update && \
-  apk add -y nginx && \
-  apk add -y wget unzip yum
+RUN dnf install -y nginx && \
+  dnf install -y wget unzip
 
 # Set working directory
 WORKDIR /usr/share/nginx/html
@@ -14,30 +13,12 @@ RUN rm -rf /usr/share/nginx/html/* && \
   wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/web.zip && \
   unzip -o web.zip && \
   rm -f web.zip && \
-  sed -i "s/splash.html/docker.html/g" /usr/share/nginx/html/js/controller.js
+  sed -i "s/splash.html/shell.html/g" /usr/share/nginx/html/js/controller.js
 
 # Adds custom Nginx configuration
-RUN cat <<EOF > /etc/nginx/default.d/roboshop.conf
-proxy_http_version 1.1;
+RUN mkdir -p /etc/nginx/default.d/
 
-location /images/ {
-  expires 5s;
-  root   /usr/share/nginx/html;
-  try_files \$uri /images/placeholder.jpg;
-}
-
-location /api/catalogue/ { proxy_pass http://catalogue:8080/; }
-location /api/user/ { proxy_pass http://user:8080/; }
-location /api/cart/ { proxy_pass http://cart:8080/; }
-location /api/shipping/ { proxy_pass http://shipping:8080/; }
-location /api/payment/ { proxy_pass http://payment:8080/; }
-
-location /health {
-  stub_status on;
-  access_log off;
-}
-EOF
-
+COPY roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 # Exposes HTTP port
 EXPOSE 80

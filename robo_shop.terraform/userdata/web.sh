@@ -46,7 +46,7 @@ yum install wget unzip -y
 wget https://buildbucket5.s3.us-east-1.amazonaws.com/RoboShop/web.zip
 unzip -o web.zip
 rm -f /usr/share/nginx/html/web.zip
-sed -i "s/splash.html/shell.html/g" /usr/share/nginx/html/js/controller.js
+sed -i "s/splash.html/terraform.html/g" /usr/share/nginx/html/js/controller.js
 validation $? "Configuring Web Interface"
 
 #Connects web interface with backend services

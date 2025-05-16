@@ -1,0 +1,36 @@
+#Build
+
+FROM maven AS build
+
+WORKDIR /app/shipping
+
+COPY pom.xml /app/shipping/
+
+RUN mvn dependency:resolve
+
+COPY src /app/shipping/src/
+
+RUN mvn package
+
+
+#Run
+
+FROM openjdk:8-jre-alpine3.9
+
+EXPOSE 8080
+
+RUN addgroup -S roboshop_grp && adduser -S roboshop -G roboshop_grp
+
+WORKDIR /app/shipping
+
+RUN chown roboshop:roboshop_grp /app/shipping
+
+USER roboshop
+
+ENV CART_ENDPOINT=cart:8080
+
+ENV DB_HOST=mysql
+
+COPY --from=build /app/shipping/target/shipping-1.0.jar shipping.jar
+
+CMD [ "java", "-Xmn256m", "-Xmx768m", "-jar", "shipping.jar" ]

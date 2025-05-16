@@ -1,0 +1,1 @@
+RabbitMQ doesnot require any custom modifications for this project, so the use of latest RabbitMQ Docker Image will suffice and it can be created using Docker Compose File itself without writing a seperate Dockerfile. 

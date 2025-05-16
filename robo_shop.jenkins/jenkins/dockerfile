@@ -1,0 +1,12 @@
+FROM jenkins/jenkins:alpine
+ENV JENKINS_USER admin
+ENV JENKINS_PASS pocof123
+COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+
+
+
+
+
+
+# docker run -d -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins

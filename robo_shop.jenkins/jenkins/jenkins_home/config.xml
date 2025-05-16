@@ -8,13 +8,6 @@
     <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
   </authorizationStrategy>
   <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
-    <localUsers>
-      <user>
-        <id>admin</id>
-        <passwordHash>#jbcrypt:$2a$12$74c2bINATDLD.MwXS1bY0.l2kKp0/ydFzhfEqLDDOUr.jwv8UueB2</passwordHash>
-        <fullName>Administrator</fullName>
-      </user>
-    </localUsers>
     <disableSignup>true</disableSignup>
     <enableCaptcha>false</enableCaptcha>
   </securityRealm>

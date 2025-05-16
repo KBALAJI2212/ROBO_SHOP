@@ -2,7 +2,7 @@ FROM jenkins/jenkins:alpine
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-COPY --chown=jenkins:jenkins config.xml /usr/share/jenkins/ref/config.xml
+COPY jenkins_home/ /var/jenkins_home/
 
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
 

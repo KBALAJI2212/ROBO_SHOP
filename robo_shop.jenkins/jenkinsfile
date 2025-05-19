@@ -68,7 +68,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/KBALAJI2212/ROBO_SHOP.git'
+               git branch: 'main', url: 'https://github.com/KBALAJI2212/ROBO_SHOP.git'
             }
         }
 

@@ -32,20 +32,22 @@ pipeline {
 
                     sh 'git pull'
 
-                    def getNextVersion(service) {
-                    def lastTag = sh(
-                    script: "curl -s 'https://hub.docker.com/v2/repositories/kbalaji2212/roboshop/tags?page_size=100' | jq -r '.results[].name' | grep '^${service}-v' | sed 's/.*-v//' | sort -n | tail -1",
-                    returnStdout: true).trim()
-
-                    def nextVersion = (lastTag.isInteger() ? lastTag.toInteger() + 1 : 1)
-                    return "${service}-v${nextVersion}"
-                    }
-
                     affected.each{service ->
                     def image = "kbalaji2212/roboshop"
-                    def tag = getNextVersion(service)
+                    def lastVersion = sh(
+                            script: """
+                                curl -s 'https://hub.docker.com/v2/repositories/kbalaji2212/roboshop/tags?page_size=100' | \
+                                grep -o '"name":"${service}-v[0-9]\\+"' | \
+                                sed 's/.*${service}-v\\([0-9]\\+\\)".*/\\1/' | \
+                                sort -n | \
+                                tail -1 || echo '0'
+                            """,
+                            returnStdout: true).trim()
 
-                    echo "Building Docker Image for ${service}"
+                        def nextVersion = (lastVersion.isInteger() ? lastVersion.toInteger() + 1 : 1)
+                        def tag = "${service}-v${nextVersion}"
+
+                    echo "Building Docker Image for ${service} with new Tag -v${nextVersion}"
 
                     sh "docker build -t ${image}:${tag} ./robo_shop.jenkins/${service}/"
 

@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Update Repository'){
             steps{
-                git 'https://github.com/KBALAJI2212/ROBO_SHOP'
+                git branch: 'main', url: 'https://github.com/KBALAJI2212/ROBO_SHOP'
                 sh 'git fetch origin main'
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                         return
                     }
 
-                    sh 'git pull'
+                    sh 'git pull origin main'
 
                     affected.each{service ->
                     def image = "kbalaji2212/roboshop"

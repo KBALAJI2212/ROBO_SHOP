@@ -17,7 +17,7 @@ pipeline {
             steps{
                 script{
                     def changedServices = sh(
-                        script :"git diff --name-only origin/main...HEAD | grep '^roboshop\.jenkins/' | cut -d/ -f2 | sort -u",
+                        script :"git diff --name-only origin/main...HEAD | grep '^roboshop\\.jenkins/' | cut -d/ -f2 | sort -u",
                         returnStdout:  true).trim().split("\n")
                     
                     def knownServices = ['user','cart','catalogue','shipping','payment','web']

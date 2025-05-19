@@ -34,18 +34,10 @@ pipeline {
 
                     def getNextVersion(service) {
                     def lastTag = sh(
-                        script: """
-                            curl -s https://hub.docker.com/v2/repositories/kbalaji2212/roboshop/tags\\?page_size=100 \\
-                            | jq -r '.results[].name' \\
-                            | grep '^${service}-v' \\
-                            | sed 's/.*-v//' \\
-                            | sort -n \\
-                            | tail -1
-                        """,
-                        returnStdout: true
-                    ).trim()
+                    script: "curl -s 'https://hub.docker.com/v2/repositories/kbalaji2212/roboshop/tags?page_size=100' | jq -r '.results[].name' | grep '^${service}-v' | sed 's/.*-v//' | sort -n | tail -1",
+                    returnStdout: true).trim()
 
-                    def nextVersion = (lastTag?.isInteger() ? lastTag.toInteger() + 1 : 1)
+                    def nextVersion = (lastTag.isInteger() ? lastTag.toInteger() + 1 : 1)
                     return "${service}-v${nextVersion}"
                     }
 

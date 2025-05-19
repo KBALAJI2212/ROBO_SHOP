@@ -1,82 +1,82 @@
-// pipeline {
-//     agent any
-
-//     environment{
-//         DOCKER_CREDS= 'docker_creds'
-//     }
-
-//     stages {
-//         stage('Update Repository'){
-//             steps{
-//                 git 'https://github.com/KBALAJI2212/ROBO_SHOP'
-//                 sh 'git fetch origin main'
-//             }
-//         }
-
-//         stage('Detect Repository Changes'){
-//             steps{
-//                 script{
-//                     def changedServices = sh(
-//                         script :"git diff --name-only origin/main...HEAD | grep '^roboshop\.jenkins/' | cut -d/ -f2 | sort -u",
-//                         returnStdout:  true).trim().split("\n")
-                    
-//                     def knownServices = ['user','cart','catalogue','shipping','payment','web','mongodb','mysql','redis','rabbitmq']
-
-//                     def affected = changedServices.findAll { knownServices.contains(it) }
-
-//                     if (affected.isEmpty()){
-//                         echo "No Changes in Service Files.Skipping Builds."
-//                         currentBuild.result = 'SUCCESS'
-//                         return
-//                     }
-
-//                     affected.each{service ->
-//                     def image = "kbalaji2212/roboshop"
-//                     def tag = "${service}-v${version}"
-
-//                     echo "Building Docker Image for ${service}"
-
-//                     sh "docker build -t ${image}:${tag} "
-
-//                     withCredentials([usernamePassword(credentialsId: DOCKER_CREDS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-//                     sh """
-//                       echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-//                       docker push ${image}:${tag}
-//                       """
-//                     }
-
-//                     echo "Restarting ${service} Container"
-
-//                     sh """
-//                         docker stop ${service} || true
-//                         docker rm ${service} || true
-//                         docker run -d --name ${service} --network=roboshop ${image}:${tag}
-
-//                     """
-//                     }
-
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
-
 pipeline {
     agent any
+
+    environment{
+        DOCKER_CREDS= 'DOCKER_CREDS'
+    }
+
     stages {
-        stage('Checkout') {
-            steps {
-               git branch: 'main', url: 'https://github.com/KBALAJI2212/ROBO_SHOP.git'
+        stage('Update Repository'){
+            steps{
+                git 'https://github.com/KBALAJI2212/ROBO_SHOP'
+                sh 'git fetch origin main'
             }
         }
 
-        stage('Check Directory') {
-            steps {
-                sh 'pwd'
-                sh 'ls -R'
+        stage('Detect Repository Changes'){
+            steps{
+                script{
+                    def changedServices = sh(
+                        script :"git diff --name-only origin/main...HEAD | grep '^roboshop\.jenkins/' | cut -d/ -f2 | sort -u",
+                        returnStdout:  true).trim().split("\n")
+                    
+                    def knownServices = ['user','cart','catalogue','shipping','payment','web']
+
+                    def affected = changedServices.findAll { knownServices.contains(it) }
+
+                    if (affected.isEmpty()){
+                        echo "No Changes in Service Files.Skipping Builds."
+                        currentBuild.result = 'SUCCESS'
+                        return
+                    }
+
+                    sh 'git pull'
+
+                    def getNextVersion(service) {
+                    def lastTag = sh(
+                        script: """
+                            curl -s https://hub.docker.com/v2/repositories/kbalaji2212/roboshop/tags\\?page_size=100 \\
+                            | jq -r '.results[].name' \\
+                            | grep '^${service}-v' \\
+                            | sed 's/.*-v//' \\
+                            | sort -n \\
+                            | tail -1
+                        """,
+                        returnStdout: true
+                    ).trim()
+
+                    def nextVersion = (lastTag?.isInteger() ? lastTag.toInteger() + 1 : 1)
+                    return "${service}-v${nextVersion}"
+                    }
+
+                    affected.each{service ->
+                    def image = "kbalaji2212/roboshop"
+                    def tag = getNextVersion(service)
+
+                    echo "Building Docker Image for ${service}"
+
+                    sh "docker build -t ${image}:${tag} ./robo_shop.jenkins/${service}/"
+
+                    withCredentials([usernamePassword(credentialsId: DOCKER_CREDS, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                      docker push ${image}:${tag}
+                      """
+                    }
+
+                    echo "Restarting ${service} Container"
+
+                    sh """
+                        docker stop ${service} || true
+                        docker rm ${service} || true
+                        docker run -d --name ${service} --network=roboshop ${image}:${tag}
+
+                    """
+                    }
+
+                }
             }
         }
     }
 }
+

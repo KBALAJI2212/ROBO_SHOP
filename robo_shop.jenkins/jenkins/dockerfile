@@ -2,9 +2,13 @@ FROM jenkins/jenkins:alpine
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 
-COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
+ENV CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/jenkins.yaml
 
-COPY user.groovy /usr/share/jenkins/ref/init.groovy.d/user.groovy
+COPY --chown=jenkins:jenkins jenkins.yaml /usr/share/jenkins/ref/jenkins.yaml
+
+COPY --chown=jenkins:jenkins user.groovy /usr/share/jenkins/ref/init.groovy.d/user.groovy
+
+COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
 
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 

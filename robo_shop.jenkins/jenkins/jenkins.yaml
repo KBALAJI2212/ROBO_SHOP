@@ -1,0 +1,28 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - usernamePassword:
+              scope: GLOBAL
+              id: "DOCKER_CREDS"
+              username: "${DOCKER_USER}"
+              password: "${DOCKER_PASS}"
+              description: "DockerHub Credentials"
+
+jobs:
+  - script: >
+      pipelineJob('roboshop') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('https://github.com/KBALAJI2212/ROBO_SHOP')
+                }
+                branches('*/main')
+              }
+            }
+            scriptPath('robo_shop.jenkins/jenkinsfile')
+          }
+        }
+      }

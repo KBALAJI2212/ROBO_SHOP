@@ -24,18 +24,22 @@ pipeline {
                     def changedServices = sh(
                         script :"git diff --name-only HEAD~1 HEAD | grep '^robo_shop\\.jenkins/' | cut -d/ -f2 | sort -u",
                         returnStdout:  true).trim().split("\n")
-                    echo "${changedServices}"
                     def knownServices = ['user','cart','catalogue','shipping','payment','web']
 
                     echo "Comparing Files to detect Changes."
+                    echo "Changed Files:${changedServices}"
+                    echo "Finding Affected Services."
 
                     affected = changedServices.findAll { knownServices.contains(it) }
 
                     if (affected.isEmpty()){
+                        echo "Affected Services:None"
                         echo "No Changes in Service Files.Skipping Next Stages."
                         currentBuild.result = 'SUCCESS'
                         return
                     }
+                    echo "Affected Services:${affected}"
+
                 }
             }
         }
@@ -46,7 +50,7 @@ pipeline {
             steps{
                 script{
 
-                   userInput=input(message:"Detected Changes in ${affected.join(',')}.Do you want to continue to build and deploy the new Docker images?" , 
+                   userInput=input(message:"Detected Changes in ${affected.join(',')}.Do you want to continue to build and deploy the new Docker images for ${affected.join(',')}?" , 
                    ok : "Submit" ,
                    parameters: [
                         choice(name: 'Confirm Build',choices:['Yes','No'],description:'Select Yes to continue or No to abort the build stage')
@@ -54,7 +58,7 @@ pipeline {
 
                     if(userInput == 'No'){
                         echo "User Selected 'No',Aborting the Build and Deploy Stage"
-                        currentBuild.result = 'FAILURE'
+                        currentBuild.result = 'ABORTED'
                         return
                     }
                     
@@ -77,7 +81,7 @@ pipeline {
                     def nextVersion = (lastVersion.isInteger() ? lastVersion.toInteger() + 1 : 1)
                     def tag = "${service}-v${nextVersion}"
 
-                    echo "Building Docker Image for ${service} with new Tag -v${nextVersion}"
+                    echo "Building Docker Image for ${service} with new Tag [-v${nextVersion}]"
 
                     sh "docker build -t ${image}:${tag} ./robo_shop.jenkins/${service}/"
 

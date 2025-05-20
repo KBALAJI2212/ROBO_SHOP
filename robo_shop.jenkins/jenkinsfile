@@ -27,6 +27,8 @@ pipeline {
                     
                     def knownServices = ['user','cart','catalogue','shipping','payment','web']
 
+                    echo "Comparing Files to detect Changes."
+                    
                     affected = changedServices.findAll { knownServices.contains(it) }
 
                     if (affected.isEmpty()){

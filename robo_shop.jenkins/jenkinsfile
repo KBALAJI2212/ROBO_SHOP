@@ -8,15 +8,17 @@ pipeline {
         DOCKER_CREDS= 'DOCKER_CREDS'
     }
 
+    def affected = []
+
     stages {
-        stage('Update Repository'){
+        stage('Updating Repository'){
             steps{
                 git branch: 'main', url: 'https://github.com/KBALAJI2212/ROBO_SHOP'
                 sh 'git fetch origin main'
             }
         }
 
-        stage('Detect Repository Changes'){
+        stage('Detecting Repository Changes'){
             steps{
                 script{
                     def changedServices = sh(
@@ -25,13 +27,36 @@ pipeline {
                     
                     def knownServices = ['user','cart','catalogue','shipping','payment','web']
 
-                    def affected = changedServices.findAll { knownServices.contains(it) }
+                    affected = changedServices.findAll { knownServices.contains(it) }
 
                     if (affected.isEmpty()){
                         echo "No Changes in Service Files.Skipping Builds."
                         currentBuild.result = 'SUCCESS'
                         return
                     }
+                }
+            }
+        }
+         stage('Build & Deploy Changed Services'){
+            when{
+                return affected && affected.size() > 0
+            }
+            steps{
+                script{
+
+                   userInput=input(message:"Detected Changes in ${affected.join(',')}.Do you want to continue to build and deploy the new Docker images?" , 
+                   ok : "Submit" ,
+                   parameters: [
+                        choice(name: 'Confirm Build',choices:['Yes','No'],description:'Select Yes to continue or No to abort the build stage')
+                    ])
+
+                    if(userInput == 'No'){
+                        echo "User Selected 'No',Aborting the Build and Deploy Stage"
+                        currentBuild.result = 'FAILURE'
+                        return
+                    }
+                    
+                    echo "User Selected 'Yes',Proceeding with the Build and Deploy Stage" 
 
                     sh 'git pull origin main'
 
@@ -47,8 +72,8 @@ pipeline {
                             """,
                             returnStdout: true).trim()
 
-                        def nextVersion = (lastVersion.isInteger() ? lastVersion.toInteger() + 1 : 1)
-                        def tag = "${service}-v${nextVersion}"
+                    def nextVersion = (lastVersion.isInteger() ? lastVersion.toInteger() + 1 : 1)
+                    def tag = "${service}-v${nextVersion}"
 
                     echo "Building Docker Image for ${service} with new Tag -v${nextVersion}"
 
@@ -70,10 +95,9 @@ pipeline {
 
                     """
                     }
-
                 }
             }
         }
+
     }
 }
-

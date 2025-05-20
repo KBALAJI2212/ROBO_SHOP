@@ -1,3 +1,5 @@
+def affected = []
+
 pipeline {
     agent any
     
@@ -7,8 +9,6 @@ pipeline {
     environment{
         DOCKER_CREDS= 'DOCKER_CREDS'
     }
-
-    def affected = []
 
     stages {
         stage('Updating Repository'){

@@ -24,7 +24,7 @@ pipeline {
                     def changedServices = sh(
                         script :"git diff --name-only origin/main...HEAD | grep '^roboshop\\.jenkins/' | cut -d/ -f2 | sort -u",
                         returnStdout:  true).trim().split("\n")
-                    
+                    echo "${changedServices}"
                     def knownServices = ['user','cart','catalogue','shipping','payment','web']
 
                     echo "Comparing Files to detect Changes."

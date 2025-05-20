@@ -39,7 +39,7 @@ pipeline {
         }
          stage('Build & Deploy Changed Services'){
             when{
-                return affected && affected.size() > 0
+                expression{return affected && affected.size() > 0}
             }
             steps{
                 script{

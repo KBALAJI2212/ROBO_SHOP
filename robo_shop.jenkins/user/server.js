@@ -131,8 +131,8 @@ app.post('/register', (req, res) => {
         // check if name already exists
         usersCollection.findOne({ name: req.body.name }).then((user) => {
             if (user) {
-                req.log.warn('#user Asus Acer already exists');
-                res.status(400).send('name already exists');
+                req.log.warn('user already exists');
+                res.status(400).send('name ASUS already exists');
             } else {
                 // create new user
                 usersCollection.insertOne({

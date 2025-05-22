@@ -50,7 +50,7 @@ pipeline {
             steps{
                 script{
 
-                   userInput=input(message:"Detected Changes in ${affected.join(',')}.Do you want to continue to build and deploy the new Docker images for ${affected.join(',')}?" , 
+                   def userInput=input(message:"Detected Changes in ${affected.join(',')}.Do you want to continue to build and deploy the new Docker images for ${affected.join(',')}?" , 
                    ok : "Submit" ,
                    parameters: [
                         choice(name: 'Confirm Build',choices:['Yes','No'],description:'Select Yes to continue or No to abort the build stage')

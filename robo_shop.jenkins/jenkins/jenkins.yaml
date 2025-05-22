@@ -25,4 +25,7 @@ jobs:
             scriptPath('robo_shop.jenkins/jenkinsfile')
           }
         }
+        triggers {
+          githubPush()
+        }
       }

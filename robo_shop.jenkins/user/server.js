@@ -132,7 +132,7 @@ app.post('/register', (req, res) => {
         usersCollection.findOne({ name: req.body.name }).then((user) => {
             if (user) {
                 req.log.warn('user already exists');
-                res.status(400).send('name ASUS already exists');
+                res.status(400).send('name ASUS ACEr already exists');
             } else {
                 // create new user
                 usersCollection.insertOne({

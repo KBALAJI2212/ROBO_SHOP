@@ -79,7 +79,7 @@ services:
       - user
       - rabbitmq
   web:
-    image: kbalaji2212/roboshop:web-v1
+    image: kbalaji2212/roboshop:web-jenkins-v1
     container_name: web
     ports:
       - "80:80"

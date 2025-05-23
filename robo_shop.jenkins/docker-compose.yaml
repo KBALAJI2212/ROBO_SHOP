@@ -90,11 +90,10 @@ services:
       - shipping
       - payment
 
-
-
-
-    
-
-        
-
-        
+  sonarqube:
+    image:  sonarqube:community
+    container_name: sonarqube
+    ports: 
+      - "8081:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true

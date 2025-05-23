@@ -6,8 +6,12 @@ pipeline {
      options {
         skipDefaultCheckout()
     }
+    tools {
+        jdk 'JDK17'
+    }
     environment{
         DOCKER_CREDS= 'DOCKER_CREDS'
+        SONAR_SCANNER_HOME = tool 'SonarScanner'
     }
 
     stages {
@@ -40,6 +44,16 @@ pipeline {
                     }
                     echo "Affected Services:${affected}"
 
+                }
+            }
+        }
+          stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                      -Dsonar.projectKey=roboshop \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://jenkins.balaji.website:8081/"
                 }
             }
         }

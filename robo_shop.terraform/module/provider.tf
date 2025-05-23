@@ -11,7 +11,7 @@ terraform {
 
   backend "s3" {
     bucket         = "roboshop5"
-    key            = "vpc/terraform.tfstate"
+    key            = "roboshop_modules/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "roboshop_tf_state_locks"
     encrypt        = true

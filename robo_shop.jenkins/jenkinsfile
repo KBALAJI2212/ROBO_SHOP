@@ -6,9 +6,6 @@ pipeline {
      options {
         skipDefaultCheckout()
     }
-    tools {
-        jdk 'JDK17'
-    }
     environment{
         DOCKER_CREDS= 'DOCKER_CREDS'
         SONAR_SCANNER_HOME = tool 'SonarScanner'

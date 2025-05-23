@@ -6,15 +6,27 @@ rabbitmq_password: RoboShop@1
 
 #####use "localhost" for services if hosted on same server, if not change "localhost" to IP address or DNS name.#####
 
-##DataBases
+##DataBases variables
 mongodb_host: localhost
 redis_host: localhost
 mysql_host: localhost
 rabbitmq_host: localhost
 
-##Services
+##Services variables
 catalogue_host: localhost
 user_host: localhost
 cart_host: localhost
 shipping_host: localhost
 payment_host: localhost
+
+services:
+  - mongodb
+  - redis
+  - rabbitmq
+  - mysql
+  - user
+  - cart
+  - catalogue
+  - shipping
+  - payment
+  - web

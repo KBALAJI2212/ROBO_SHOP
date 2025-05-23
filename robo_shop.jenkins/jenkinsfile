@@ -8,10 +8,10 @@ pipeline {
     }
     environment{
         DOCKER_CREDS= 'DOCKER_CREDS'
-        SONAR_SCANNER_HOME = tool 'SonarScanner'
     }
 
     stages {
+
         stage('Updating Repository'){
             steps{
                 git branch: 'main', url: 'https://github.com/KBALAJI2212/ROBO_SHOP'
@@ -44,17 +44,8 @@ pipeline {
                 }
             }
         }
-          stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh "${env.SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                      -Dsonar.projectKey=roboshop \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=http://jenkins.balaji.website:8081/"
-                }
-            }
-        }
-         stage('Build & Deploy Changed Services'){
+
+        stage('Build & Deploy Changed Services'){
             when{
                 expression{return affected && affected.size() > 0}
             }

@@ -1,8 +1,7 @@
 resource "aws_ssm_parameter" "roboshop_ami_id" {
-  name = "/roboshop/ami_id"
-  type = "String"
-  # value = "ami-05e4b14c7aae9345e"
-  value = "ami-03927872d4942e3eb"
+  name  = "/roboshop/ami_id"
+  type  = "String"
+  value = "ami-0ce840c862563751e"
 }
 
 resource "aws_ssm_parameter" "roboshop_vpc_id" {

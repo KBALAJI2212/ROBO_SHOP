@@ -119,7 +119,7 @@ services:
     image: prom/node-exporter
     container_name: node-exporter
     ports:
-      - 8083":9100"
+      - "8083:9100"
     volumes:
       - "/:/host:ro,rslave"
     command:

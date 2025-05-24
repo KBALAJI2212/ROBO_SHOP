@@ -20,6 +20,5 @@ ws-cleanup
 ansicolor
 docker-workflow
 docker-plugin
-sonar
 configuration-as-code
 job-dsl

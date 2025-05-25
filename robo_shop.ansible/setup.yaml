@@ -1,8 +1,7 @@
-- name: "Setting Up {{item}} Service"
+- name: "Setting Up {{service}} Service"
   become: yes
-  hosts: "{{item}}"
+  hosts: "{{service}}"
   vars_files:
     - variables.yaml
   roles:
-    - "{{item}}"
-  loop: "{{ services }}"
+    - "{{service}}"

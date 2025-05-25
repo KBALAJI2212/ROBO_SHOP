@@ -18,15 +18,9 @@ user_host: localhost
 cart_host: localhost
 shipping_host: localhost
 payment_host: localhost
-
-services:
-  - mongodb
-  - redis
-  - rabbitmq
-  - mysql
-  - user
-  - cart
-  - catalogue
-  - shipping
-  - payment
-  - web
+#
+#
+#bash command to loop services
+# for i in mongodb redis rabbitmq mysql user cart catalogue shipping payment web; do
+#   ansible-playbook -i inventory.ini setup.yaml -e "service=$i"
+# done

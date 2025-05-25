@@ -1,5 +1,7 @@
 #This is a security risk. we should use Ansible Vault for storing sensitive info.
-
+ansible_user: balaji
+ansible_password: pocof123
+ansible_connection: ssh
 mysql_password: RoboShop@1
 rabbitmq_password: RoboShop@1
 

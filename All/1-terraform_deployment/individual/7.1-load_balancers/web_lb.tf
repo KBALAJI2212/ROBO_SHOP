@@ -19,25 +19,6 @@ resource "aws_lb" "web_lb" {
 
 }
 
-resource "aws_lb_listener" "web_lb_https_listener" {
-  load_balancer_arn = aws_lb.web_lb.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-
-  certificate_arn = data.aws_ssm_parameter.hosted_zone_cert_arn.value
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.web_tg.arn
-  }
-
-  tags = {
-    Name = "web_lb_https_listener"
-  }
-}
-
-
 resource "aws_lb_listener" "web_lb_http_listener" {
   load_balancer_arn = aws_lb.web_lb.arn
   port              = 80
@@ -58,6 +39,27 @@ resource "aws_lb_listener" "web_lb_http_listener" {
   }
 }
 
+resource "aws_lb_listener" "web_lb_https_listener" {
+  load_balancer_arn = aws_lb.web_lb.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+  certificate_arn = data.aws_ssm_parameter.hosted_zone_cert_arn.value
+
+  default_action {
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Requested Host Header did not match any Service."
+      status_code  = "404"
+    }
+  }
+
+  tags = {
+    Name = "web_lb_https_listener"
+  }
+}
 
 resource "aws_lb_target_group" "web_tg" {
 
@@ -83,9 +85,29 @@ resource "aws_lb_target_group" "web_tg" {
 }
 
 
+resource "aws_lb_listener_rule" "terraform_deployment_listener_rule" {
+  listener_arn = aws_lb_listener.web_lb_https_listener.arn
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.web_tg.arn
+  }
+
+  condition {
+    host_header {
+      values = ["terraform.balaji.website"]
+    }
+  }
+
+  tags = {
+    Name = "terraform_deployment_listener_rule"
+  }
+}
+
+
 #DNS RECORD
 
-resource "aws_route53_record" "web_record" {
+resource "aws_route53_record" "terraform_deployment_web_record" {
   zone_id = "Z04307862A5Z0E82KA5RX"
   name    = "terraform.balaji.website"
   type    = "A"

@@ -11,15 +11,18 @@ data "aws_ssm_parameter" "public_subnet_id" {
   name  = "/roboshop/public_subnet_id_${count.index + 1}"
 }
 
+data "aws_ssm_parameter" "roboshop_vpc_id" {
+  name = "/roboshop/vpc_id"
+}
 
-data "aws_instances" "ansible_deployment_instance_public_ip" {
+data "aws_ssm_parameter" "web_lb_https_listener_arn" {
+  name = "/roboshop/web_lb_https_listener_arn"
+}
 
-  filter {
-    name   = "tag:Name"
-    values = ["ansible_deployment_instance"]
-  }
-  filter {
-    name   = "instance-state-name"
-    values = ["running"]
-  }
+data "aws_ssm_parameter" "web_lb_dns" {
+  name = "/roboshop/web_lb_dns"
+}
+
+data "aws_ssm_parameter" "web_lb_zone_id" {
+  name = "/roboshop/web_lb_zone_id"
 }

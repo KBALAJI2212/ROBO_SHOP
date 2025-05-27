@@ -5,7 +5,7 @@
 **How It Works**:
 
 - **Configuration as Code**: Used a Jenkins plugin to skip manual setup of jenkins and create an initial user via code.
-- **Dockerized Jenkins**: Baked the Jenkins configuration into a Docker image, hosted on [**Docker Hub**] (https://hub.docker.com/r/kbalaji2212/roboshop/tags).
+- **Dockerized Jenkins**: Baked the Jenkins configuration into a Docker image, hosted on [**Docker Hub**](https://hub.docker.com/r/kbalaji2212/roboshop/tags).
 
 - **Pipeline Workflow**:
   - A GitHub webhook triggers the pipeline if code changes are made.

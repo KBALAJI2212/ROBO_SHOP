@@ -92,7 +92,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 **How It Works**:
 
 - **Configuration as Code**: Used a Jenkins plugin to skip manual setup of jenkins and create an initial user via code.
-- **Dockerized Jenkins**: Baked the Jenkins configuration into a Docker image, hosted on [**Docker Hub**] (https://hub.docker.com/r/kbalaji2212/roboshop/tags).
+- **Dockerized Jenkins**: Baked the Jenkins configuration into a Docker image, hosted on [**Docker Hub**](https://hub.docker.com/r/kbalaji2212/roboshop/tags).
 
 - **Pipeline Workflow**:
   - A GitHub webhook triggers the pipeline if code changes are made.
@@ -142,7 +142,7 @@ I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment,
 
 **How It Works**:
 
-- Each service has a **Dockerfile** to build its image,also stored on [**Docker Hub**] (https://hub.docker.com/r/kbalaji2212/roboshop/tags).
+- Each service has a **Dockerfile** to build its image,also stored on [**Docker Hub**](https://hub.docker.com/r/kbalaji2212/roboshop/tags).
 - A **Docker Compose** file pulls these images and sets up the entire Roboshop stack inside a custom network with a single `docker-compose up` command.
 - Containers are configured to communicate with databases and among themselves within the private network.
 

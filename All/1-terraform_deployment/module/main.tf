@@ -22,14 +22,17 @@ module "databases" {
   depends_on = [module.network]
 }
 
-module "acm" {
-  source     = "../individual/7-ACM"
-  depends_on = [module.databases]
-}
+# module "acm" {
+# source="../individual/7-ACM"
+# depends_on=[module.databases] 
+#}
+#This resource is already created as part of a seperate project(Cloud-resume-challenge).So its commented out.Should be Uncommented for standalone RoboShop Project. 
+
 
 module "load_balancers" {
-  source     = "../individual/7.1-load_balancers"
-  depends_on = [module.acm]
+  source = "../individual/7.1-load_balancers"
+  # depends_on=[module.acm] 
+  depends_on = [module.databases]
 }
 
 resource "time_sleep" "app_delay" {

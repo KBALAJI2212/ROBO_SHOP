@@ -1,7 +1,7 @@
 resource "aws_launch_template" "jenkins_deployment_lt" {
   name                   = "jenkins-deployment-launchtemplate"
   image_id               = data.aws_ssm_parameter.roboshop_ami_id.value
-  instance_type          = "t3.small"
+  instance_type          = "t3.medium"
   vpc_security_group_ids = [data.aws_ssm_parameter.public_sg_id.value]
 
   instance_market_options {
@@ -16,7 +16,7 @@ resource "aws_launch_template" "jenkins_deployment_lt" {
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
-      volume_size = 15
+      volume_size = 25
     }
   }
 
@@ -27,6 +27,7 @@ systemctl start docker
 mkdir /home/balaji/jenkins_data
 sudo chown -R 1000:1000 /home/balaji/jenkins_data
 git clone https://github.com/KBALAJI2212/ROBO_SHOP.git
+sleep 20s
 docker compose -f /home/balaji/ROBO_SHOP/robo_shop.jenkins/docker-compose.yaml up -d
 EOF
   )

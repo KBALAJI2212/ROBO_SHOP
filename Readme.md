@@ -1,6 +1,6 @@
 # Roboshop E-commerce Microservices Project
 
-## Introduction
+## Project Overview
 
 The Roboshop project is a fully functional ecommerce platform built with microservices to demonstrate a scalable, **3-tier architecture**. Users can browse products, create accounts, add items to their cart, view purchase history, and ship globally. The project leverages **NGINX** as a reverse proxy, Node.js, Java, and Python-based microservices, and databases like **MongoDB**, **Redis**, **RabbitMQ**, **MySQL**.
 

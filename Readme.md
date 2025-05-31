@@ -31,8 +31,8 @@ This README dives into how each tool was used, with a special focus on Terraform
 <h2>ARCHITECTURE DIAGRAMS</h2>
 
 <p float="left">
-  <img src="images/ROBOSHOP_LAYOUT.jpeg" width="300"/>
-  <img src="images/ROBOSHOP_INFRA.jpg" width="300"/>
+  <img src="images/ROBOSHOP_LAYOUT.jpeg" width="600"/>
+  <img src="images/ROBOSHOP_INFRA.jpg" width="600"/>
 </p>
 
 ---
@@ -225,5 +225,7 @@ I wrote shell scripts to install and configure each service (e.g., User, Cart, N
   <img src="images/orderhistory.png" width="300"/>
 </p>
 
+
+---
 
 *Note:These applications are based on an [open-source_project](https://github.com/instana/robot-shop).I did not develop the original code for these applications.I am only deploying and managing these applications to demonstrate my expertise in infrastructure automation,management and deployment.*

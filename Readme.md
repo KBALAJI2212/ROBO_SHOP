@@ -1,5 +1,7 @@
 # Roboshop E-commerce Microservices Project
 
+___
+
 ## Project Overview
 
 The Roboshop project is a fully functional ecommerce platform built with microservices to demonstrate a scalable, **3-tier architecture**. Users can browse products, create accounts, add items to their cart, view purchase history, and ship globally. The project leverages **NGINX** as a reverse proxy, Node.js, Java, and Python-based microservices, and databases like **MongoDB**, **Redis**, **RabbitMQ**, **MySQL**.
@@ -8,7 +10,7 @@ The project is deployed using **Shell-Scripting**, **Ansible**, **Terraform**, *
 
 This README dives into how each tool was used, with a special focus on Terraform and Jenkins, which handle the heavy lifting for infrastructure and CI/CD automation. Let’s explore!
 
-
+---
 
 ### Architecture
 
@@ -39,7 +41,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 
 ## Tools and Implementation
 
-### 1. Terraform-[DEPLOYMENT LINK](https://balaji.website)
+### 1. TERRAFORM- [Deployment Link](https://balaji.website)
 
 **Terraform** is the backbone of this project’s infrastructure, automating the provisioning of a secure, scalable, and cost-optimized Roboshop environment on AWS. I went all-in to make this setup robust and production-ready.
 
@@ -91,7 +93,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 ---
 
 
-### 2. Jenkins with Monitoring Stack-[DEPLOYMENT LINK](https://balaji.website)
+### 2. JENKINS WITH MONITORING STACK- [Deployment Link](https://balaji.website)
 
 **Jenkins** powers the CI/CD pipeline for Roboshop, automating code updates, image building, and deployment. This was a big focus for me to ensure a fully automated, hands-off workflow.
 
@@ -142,7 +144,7 @@ These tools are deployed automatically during initial run of Docker Compose comm
 ---
 
 
-### 3. Docker-[DEPLOYMENT LINK](https://balaji.website)
+### 3. DOCKER- [Deployment Link](https://balaji.website)
 
 I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment, NGINX) to ensure consistency and portability.
 
@@ -168,7 +170,7 @@ I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment,
 ---
 
 
-### 4. Ansible-[DEPLOYMENT LINK](https://balaji.website)
+### 4. ANSIBLE- [Deployment Link](https://balaji.website)
 
 I used **Ansible** roles to automate service configuration across multiple instances, making it easier to scale the Roboshop setup.
 
@@ -193,7 +195,7 @@ I used **Ansible** roles to automate service configuration across multiple insta
 ---
 
 
-### 5. Shell Scripting-[DEPLOYMENT LINK](https://balaji.website)
+### 5. SHELL SCRIPTING- [Deployment Link](https://balaji.website)
 
 I wrote shell scripts to install and configure each service (e.g., User, Cart, NGINX) individually or all at once using an `all-in-one` script on a single instance.
 

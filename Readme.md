@@ -28,12 +28,18 @@ This README dives into how each tool was used, with a special focus on Terraform
 
 - **Monitoring**: Grafana, Prometheus, cAdvisor, and Node-Exporter provide comprehensive monitoring of containers and hosts.
 
+<h2>ARCHITECTURE DIAGRAMS</h2>
+
+<p float="left">
+  <img src="images/ROBOSHOP_LAYOUT.jpeg" width="300"/>
+  <img src="images/ROBOSHOP_INFRA.jpg" width="300"/>
+</p>
 
 ---
 
 ## Tools and Implementation
 
-### 1. Terraform-[DEPLOYMENT LINK](https://terraform.balaji.website)
+### 1. Terraform-[DEPLOYMENT LINK](https://balaji.website)
 
 **Terraform** is the backbone of this project’s infrastructure, automating the provisioning of a secure, scalable, and cost-optimized Roboshop environment on AWS. I went all-in to make this setup robust and production-ready.
 
@@ -85,7 +91,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 ---
 
 
-### 2. Jenkins with Monitoring Stack-[DEPLOYMENT LINK](https://jenkins.balaji.website)
+### 2. Jenkins with Monitoring Stack-[DEPLOYMENT LINK](https://balaji.website)
 
 **Jenkins** powers the CI/CD pipeline for Roboshop, automating code updates, image building, and deployment. This was a big focus for me to ensure a fully automated, hands-off workflow.
 
@@ -136,7 +142,7 @@ These tools are deployed automatically during initial run of Docker Compose comm
 ---
 
 
-### 3. Docker-[DEPLOYMENT LINK](https://docker.balaji.website)
+### 3. Docker-[DEPLOYMENT LINK](https://balaji.website)
 
 I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment, NGINX) to ensure consistency and portability.
 
@@ -162,7 +168,7 @@ I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment,
 ---
 
 
-### 4. Ansible-[DEPLOYMENT LINK](https://ansible.balaji.website)
+### 4. Ansible-[DEPLOYMENT LINK](https://balaji.website)
 
 I used **Ansible** roles to automate service configuration across multiple instances, making it easier to scale the Roboshop setup.
 
@@ -187,7 +193,7 @@ I used **Ansible** roles to automate service configuration across multiple insta
 ---
 
 
-### 5. Shell Scripting-[DEPLOYMENT LINK](https://shell.balaji.website)
+### 5. Shell Scripting-[DEPLOYMENT LINK](https://balaji.website)
 
 I wrote shell scripts to install and configure each service (e.g., User, Cart, NGINX) individually or all at once using an `all-in-one` script on a single instance.
 
@@ -209,6 +215,15 @@ I wrote shell scripts to install and configure each service (e.g., User, Cart, N
 
 ---
 
+<h2>PROJECT SCREENSHOTS</h2>
+
+<p float="left">
+  <img src="images/user.png" width="300"/>
+  <img src="images/catalogue.png" width="300"/>
+  <img src="images/shipping.png" width="300"/>
+  <img src="images/payment.png" width="300"/>
+  <img src="images/orderhistory.png" width="300"/>
+</p>
 
 
 *Note:These applications are based on an [open-source_project](https://github.com/instana/robot-shop).I did not develop the original code for these applications.I am only deploying and managing these applications to demonstrate my expertise in infrastructure automation,management and deployment.*

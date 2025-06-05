@@ -10,6 +10,11 @@ resource "aws_instance" "nat_instance" {
   root_block_device {
     volume_size = 10
   }
+
+  instance_market_options {
+    market_type = "spot"
+  }
+
   user_data = base64encode(<<EOF
 #!/bin/bash
 sleep 20

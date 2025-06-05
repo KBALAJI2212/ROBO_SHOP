@@ -26,8 +26,8 @@ resource "aws_launch_template" "jenkins_deployment_lt" {
 systemctl start docker
 mkdir /home/balaji/jenkins_data
 sudo chown -R 1000:1000 /home/balaji/jenkins_data
+cd /home/balaji
 git clone https://github.com/KBALAJI2212/ROBO_SHOP.git
-sleep 20s
 docker compose -f /home/balaji/ROBO_SHOP/robo_shop.jenkins/docker-compose.yaml up -d
 EOF
   )

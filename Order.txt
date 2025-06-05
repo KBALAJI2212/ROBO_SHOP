@@ -1,9 +1,0 @@
-Sequential Order of Micro-Services:
-
-DataBases
-User 8081
-Catalogue 8082
-Cart 8083
-Shipping 8084
-Payments 8085
-Web

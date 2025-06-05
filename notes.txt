@@ -1,0 +1,40 @@
+Sequential Order of Micro-Services:
+
+DataBases
+User 8081
+Catalogue 8082
+Cart 8083
+Shipping 8084
+Payments 8085
+Web
+
+
+
+
+
+
+start docker 
+systemctl start docker
+
+use docker compose to start Services
+docker compose -f ./ROBO_SHOP/robo_shop.jenkins/docker-compose.yaml up -d
+
+build jenkins_img
+docker build -t jenkins ./ROBO_SHOP/robo_shop.jenkins/jenkins
+
+change permissions in host  
+mkdir jenkins_data
+sudo chown -R 1000:1000 /home/balaji/jenkins_data
+
+run jenkins
+docker run -d -p 8080:8080 -v /home/balaji/jenkins_data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --group-add 990 --network=roboshop --name=jenkins jenkins
+
+
+
+
+
+
+Grafana Dashboard Code 
+10566
+
+Edit dashboard variables in setting. Select Query type as Classic Query and type label_values(up, instance)

@@ -1,3 +1,5 @@
+###This TF_file is related to Cloud Resume Challenge Project
+
 resource "aws_s3_bucket_website_configuration" "switch_page" {
   bucket = "buildbucket5"
 

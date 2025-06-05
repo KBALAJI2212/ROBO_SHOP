@@ -94,6 +94,8 @@ module "jenkins_deployment" {
   source     = "../../5-jenkins_deployment/"
   depends_on = [module.docker_deployment]
 }
+
+##This part is related to Cloud Resume Challenge Project
 module "web_hosting_config" {
   source     = "../../web_hosting_config"
   depends_on = [module.jenkins_deployment]

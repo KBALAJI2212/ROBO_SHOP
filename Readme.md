@@ -41,7 +41,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 
 ## Tools and Implementation
 
-### 1. TERRAFORM- [Deployment Link](https://balaji.website)
+### 1. TERRAFORM
 
 **Terraform** is the backbone of this project’s infrastructure, automating the provisioning of a secure, scalable, and cost-optimized Roboshop environment on AWS. I went all-in to make this setup robust and production-ready.
 
@@ -93,7 +93,7 @@ This README dives into how each tool was used, with a special focus on Terraform
 ---
 
 
-### 2. JENKINS WITH MONITORING STACK- [Deployment Link](https://balaji.website)
+### 2. JENKINS WITH MONITORING STACK
 
 **Jenkins** powers the CI/CD pipeline for Roboshop, automating code updates, image building, and deployment. This was a big focus for me to ensure a fully automated, hands-off workflow.
 
@@ -144,7 +144,7 @@ These tools are deployed automatically during initial run of Docker Compose comm
 ---
 
 
-### 3. DOCKER- [Deployment Link](https://balaji.website)
+### 3. DOCKER
 
 I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment, NGINX) to ensure consistency and portability.
 
@@ -170,7 +170,7 @@ I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment,
 ---
 
 
-### 4. ANSIBLE- [Deployment Link](https://balaji.website)
+### 4. ANSIBLE
 
 I used **Ansible** roles to automate service configuration across multiple instances, making it easier to scale the Roboshop setup.
 
@@ -195,7 +195,7 @@ I used **Ansible** roles to automate service configuration across multiple insta
 ---
 
 
-### 5. SHELL SCRIPTING- [Deployment Link](https://balaji.website)
+### 5. SHELL SCRIPTING
 
 I wrote shell scripts to install and configure each service (e.g., User, Cart, NGINX) individually or all at once using an `all-in-one` script on a single instance.
 

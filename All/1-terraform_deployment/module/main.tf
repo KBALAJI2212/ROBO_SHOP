@@ -99,4 +99,9 @@ module "jenkins_deployment" {
 module "web_hosting_config" {
   source     = "../../web_hosting_config"
   depends_on = [module.jenkins_deployment]
+  infra      = var.infra
+}
+variable "infra" {
+  type    = string
+  default = "up"
 }

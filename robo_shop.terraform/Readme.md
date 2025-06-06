@@ -1,4 +1,4 @@
-### Terraform-[DEPLOYMENT LINK](https://terraform.balaji.website:80/)
+### Terraform
 
 **Terraform** is the backbone of this project’s infrastructure, automating the provisioning of a secure, scalable, and cost-optimized Roboshop environment on AWS. I went all-in to make this setup robust and production-ready.
 

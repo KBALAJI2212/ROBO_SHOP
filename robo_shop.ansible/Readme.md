@@ -1,4 +1,4 @@
-### Ansible-[DEPLOYMENT LINK](https://ansible.balaji.website:80/)
+### Ansible
 
 I used **Ansible** roles to automate service configuration across multiple instances, making it easier to scale the Roboshop setup.
 

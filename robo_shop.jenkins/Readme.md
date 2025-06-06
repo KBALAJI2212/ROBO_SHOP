@@ -1,5 +1,4 @@
-### Jenkins with Monitoring Stack-[DEPLOYMENT LINK](https://jenkins.balaji.website:80/)
-
+### Jenkins with Monitoring Stack
 **Jenkins** powers the CI/CD pipeline for Roboshop, automating code updates, image building, and deployment. This was a big focus for me to ensure a fully automated, hands-off workflow.
 
 **How It Works**:

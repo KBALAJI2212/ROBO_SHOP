@@ -1,4 +1,4 @@
-### Shell Scripting-[DEPLOYMENT LINK](https://shell.balaji.website:80/)
+### Shell Scripting
 
 I wrote shell scripts to install and configure each service (e.g., User, Cart, NGINX) individually or all at once using an `all-in-one` script on a single instance.
 

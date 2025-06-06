@@ -1,4 +1,4 @@
-### Docker-[DEPLOYMENT LINK](https://docker.balaji.website:80/)
+### Docker
 
 I containerized all Roboshop services (User, Cart, Catalogue, Shipping, Payment, NGINX) to ensure consistency and portability.
 
